@@ -28,3 +28,27 @@
 
 </dl>
 
+## Utilites
+<dl>
+
+  <dt>
+    Poetry - Python dependency management and packaging made easy (en)
+    <br>https://python-poetry.org
+    <br>https://github.com/python-poetry/poetry
+    <br>https://pypi.org/project/poetry
+  </dt>
+  <dd>
+    Python dependency management and packaging made easy.
+  </dd>
+
+  <dt>
+    Tox is a generic virtualenv management and test command line tool (en)
+    <br>https://tox.wiki
+    <br>https://github.com/tox-dev/tox
+    <br>https://pypi.org/project/tox/
+  </dt>
+  <dd>
+    tox aims to automate and standardize testing in Python. It is part of a larger vision of easing the packaging, testing and release process of Python software (alongside pytest and devpi).
+  </dd>
+
+</dl>
