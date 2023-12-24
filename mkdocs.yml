@@ -73,10 +73,10 @@ theme:
     - navigation.tabs.sticky
     #- navigation.sections
     - navigation.path
-    - toc.integrate
+    #- toc.integrate
     - navigation.indexes
     - navigation.top
-    #- navigation.expand
+    - navigation.expand
 
     # Content
     - content.action.view # View source of this page
