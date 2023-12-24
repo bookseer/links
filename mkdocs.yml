@@ -73,7 +73,7 @@ theme:
     - navigation.tabs.sticky
     #- navigation.sections
     - navigation.path
-    #- toc.integrate
+    - toc.integrate
     - navigation.indexes
     - navigation.top
     #- navigation.expand
