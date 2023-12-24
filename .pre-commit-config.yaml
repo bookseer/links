@@ -1,0 +1,197 @@
+default_language_version:
+  python: python3.12
+
+minimum_pre_commit_version: 3.5.0
+
+files: ''
+exclude: ^venv/ ^.git/
+fail_fast: true # false #
+
+default_stages: [pre-commit, pre-merge-commit, pre-push]
+
+repos:
+
+- repo: local
+  hooks:
+
+#======================================================================================================================
+# Git hooks
+#======================================================================================================================
+  - id: forbid-new-submodules
+    name: "Prevent addition of new git submodules (forbid-new-submodules)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: forbid-new-submodules
+    types: [file]
+    require_serial: true
+
+  - id: check-merge-conflict
+    name: "Check for files that contain merge conflict strings (check-merge-conflict)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: check-merge-conflict
+    types: [file]
+    require_serial: true
+
+  - id: check-added-large-files
+    name: "Prevent giant files from being committed (check-added-large-files)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: check-added-large-files
+    args: [--maxkb=10240,
+           --enforce-all,
+    ]
+    types: [file]
+    require_serial: true
+
+  - id: check-case-conflict
+    name: "Check for files with names that would conflict on a case-insensitive filesystem (check-case-conflict)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: check-case-conflict
+    types: [file]
+    require_serial: true
+
+
+#======================================================================================================================
+# Common files hooks
+#======================================================================================================================
+  - id: trailing-whitespace
+    name: "Trims trailing whitespace (trailing-whitespace)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: trailing-whitespace-fixer
+    types: [text]
+    require_serial: true
+
+  - id: mixed-line-ending
+    name: "Replaces or checks mixed line ending (mixed-line-ending)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: mixed-line-ending
+    args: [--fix=lf]
+    types: [text]
+    require_serial: true
+
+  - id: end-of-file-fixer
+    name: "Makes sure files end in a newline and only a newline (end-of-file-fixer)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: end-of-file-fixer
+    types_or: [markdown, pyi, python]
+    require_serial: true
+
+  - id: fix-byte-order-marker
+    name: "Removes UTF-8 byte order marker (fix-byte-order-marker)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: fix-byte-order-marker
+    types: [text]
+    require_serial: true
+
+  - id: check-executables-have-shebangs
+    name: "Checks that non-binary executables have a proper shebang (check-executables-have-shebangs)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: check-executables-have-shebangs
+    types_or: [bash, python]
+    require_serial: true
+
+  - id: check-symlinks
+    name: "Checks for symlinks which do not point to anything (check-symlinks)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: check-symlinks
+    types_or: [text]
+    require_serial: true
+
+  - id: check-vcs-permalinks
+    name: "Ensures that links to vcs websites are permalinks (check-vcs-permalinks)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: check-vcs-permalinks
+    types_or: [text]
+    require_serial: true
+
+  - id: destroyed-symlinks
+    name: "Detects symlinks which are changed to regular files with a content of a path (destroyed-symlinks)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: destroyed-symlinks
+    types_or: [text]
+    require_serial: true
+
+  - id: detect-private-key
+    name: "Checks for the existence of private keys (detect-private-key)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: detect-private-key
+    types_or: [text]
+    require_serial: true
+
+
+#======================================================================================================================
+# Type files hooks
+#======================================================================================================================
+  - id: check-ast
+    name: "Simply check whether files parse as valid python (check-ast)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: check-ast
+    types_or: [pyi, python]
+    require_serial: true
+
+  - id: pretty-format-json
+    name: "Checks that all your JSON files are pretty (pretty-format-json)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: pretty-format-json
+    args: [--autofix,
+           --indent=4,
+           --no-ensure-ascii,
+           --no-sort-keys,
+    ]
+    types_or: [json, jupyter]
+    require_serial: true
+
+  - id: check-json
+    name: "Attempts to load all json files to verify syntax (check-json)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: check-json
+    types_or: [json, jupyter]
+    require_serial: true
+
+  - id: check-toml
+    name: "Attempts to load all TOML files to verify syntax (check-toml)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: check-toml
+    types: [toml]
+    require_serial: true
+
+  - id: check-xml
+    name: "Attempts to load all xml files to verify syntax (check-xml)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: check-xml
+    types_or: [html, xml, xhtml]
+    require_serial: true
+
+  - id: check-yaml
+    name: "Attempts to load all yaml files to verify syntax (check-yaml)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: check-yaml
+    args: [--allow-multiple-documents]
+    types: [yaml]
+    require_serial: true
+
+  - id: requirements-txt-fixer
+    name: "Sorts entries in requirements.txt and constraints.txt (requirements-txt-fixer)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: requirements-txt-fixer
+    files: ^(requirements).*(.txt)$
+    require_serial: true
+    verbose: true

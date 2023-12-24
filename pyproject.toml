@@ -1,0 +1,70 @@
+#======================================================================================================================
+# Poetry: Python dependency management and packaging made easy
+#======================================================================================================================
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.poetry]
+name = "link-on-website"
+version = "0.1.0"
+description = "Link on Website"
+authors = ["Alexander Krasnikov <alexander@krasnikov.net>"]
+maintainers = ["askras <alexander@krasnikov.net>"]
+license = "CC0 1.0 Universal"
+readme = "README.md"
+homepage = "https://www.linkon.website"
+repository = "http://github.com/askras/link-on-website"
+documentation = "https://www.linkon.website/docs"
+keywords = ["link catalog", "useful links", "dev"]
+#classifier = []
+
+
+[tool.poetry.dependencies]
+python = "^3.12"
+
+
+[tool.poetry.group.dev.dependencies]
+pip = "^23.3.1"
+poetry-exec-plugin = "^0.3.6"
+poetry-plugin-export = "^1.6.0"
+pre-commit = "^3.6.0"
+pre-commit-hooks = "^4.5.0"
+
+
+[tool.poetry.extras]
+
+
+[tool.poetry.scripts]
+
+
+[tool.poetry-exec-plugin.commands]
+# Init this repo
+install = """
+poetry install;
+pre-commit install;
+"""
+
+# Export all dependencies to requirements.rxt and requirements-dev.rxt.
+export = """
+echo 'Exports dependencies to requirements.rxt'
+poetry export --without-hashes --without=dev --format requirements.txt --output requirements.txt
+echo 'Exports developer dependencies to requirements-dev.txt.'
+poetry export --without-hashes --only=dev --format requirements.txt --output requirements-dev.txt
+"""
+
+# Update this repo
+update = """
+poetry update --version;
+poetry update;
+poetry exec export;
+pre-commit autoupdate --freeze;
+poetry show --top-level --outdated;
+"""
+
+# Run pre-commit
+precommit = "pre-commit run --all-files"
+
+# Deactivate virtual environment.
+stop = "deactivate; exit"
