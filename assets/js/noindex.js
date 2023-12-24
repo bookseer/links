@@ -1,5 +1,5 @@
 // Get all outer anchor tags in document
-const selector = 'a[href^=https]';
+const selector = 'a[href^=http]';
 const links = document.querySelectorAll(selector);
 
 
