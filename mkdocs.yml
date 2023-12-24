@@ -1,0 +1,108 @@
+# Project information
+site_name: Link on Website
+site_url: https://www.linkon.website/
+site_author: Krasnikov Alexander
+site_description: A catalog of useful links for developers
+
+
+# Repository
+repo_url: https://github.com/askras/link-on-website/
+edit_uri: edit/master/docs/
+
+
+# Copyright
+copyright: >-
+  <a href="https://linkon.website">Link on Website</a>
+  is marked with
+  <a href="http://creativecommons.org/publicdomain/zero/1.0"
+    target="_blank" rel="license noopener noreferrer" style="display:inline-block;">
+    CC0 1.0 Universal</a>
+  <br/>
+  Build with
+  <a href="https://www.mkdocs.org/" target="_blank" rel="noopener">
+    MkDocs
+  </a>
+  and
+  <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+    Material for MkDocs
+  </a>
+
+
+# Configuration
+
+extra_javascript:
+  - assets/js/noindex.js
+
+
+theme:
+  name: material
+  language: en
+
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+
+  icon:
+    repo: fontawesome/brands/github
+
+  features:
+    # Navigation
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
+    - navigation.tabs
+    - navigation.tabs.sticky
+    #- navigation.sections
+    - navigation.path
+    #- toc.integrate
+    - navigation.indexes
+    - navigation.top
+    #- navigation.expand
+
+    # Content
+    - content.action.view # View source of this page
+    - content.action.edit # Edit this page
+
+    # Search
+    - search.suggest
+    - search.highlight
+    - search.share
+
+plugins:
+  - search
+  - git-revision-date-localized:
+      enable_creation_date: true
+
+
+extra:
+  # Link reload in template
+  generator: false
+  homepage: https://linkon.website
+
+
+# Page tree
+nav:
+  - Home: index.md
+  - Python:
+      - python/index.md
+      - Python Packages:
+        - python/packages/index.md

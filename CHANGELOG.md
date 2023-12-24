@@ -22,3 +22,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - `.gitignore` file
+
+
+## [0.2.0] - 2023-12-25
+
+### Added
+- Dependencies: MkDocs
+- Links for python

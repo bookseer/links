@@ -8,7 +8,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "link-on-website"
-version = "0.1.0"
+version = "0.2.0"
 description = "Link on Website"
 authors = ["Alexander Krasnikov <alexander@krasnikov.net>"]
 maintainers = ["askras <alexander@krasnikov.net>"]
@@ -26,6 +26,9 @@ python = "^3.12"
 
 
 [tool.poetry.group.dev.dependencies]
+mkdocs = "1.5.3"
+mkdocs-git-revision-date-localized-plugin = "^1.2.2"
+mkdocs-material = "^9.5.3"
 pip = "^23.3.1"
 poetry-exec-plugin = "^0.3.6"
 poetry-plugin-export = "^1.6.0"
