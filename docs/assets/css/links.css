@@ -1,10 +1,7 @@
+
 li p:hover {
   font-weight: bold;
-  border-radius: 12px;
-  color: black;
 }
-
-
 
 li:hover a {
   /*background-color: #F0F0F0;*/
@@ -24,4 +21,8 @@ a.lang_link {
 a.lang_link:hover {
   background-color:black;
   color: white;
+}
+
+a.lang_link:visited {
+  color: black;
 }
