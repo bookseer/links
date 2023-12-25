@@ -16,7 +16,7 @@ The fundamental package for scientific computing with Python
     - en - [https://numpy.org](http://numpy.org)
 
 - The NumPy documentation
-    - en: [https://numpy.org/doc/](https://numpy.org/doc/)
+    - en - [https://numpy.org/doc/](https://numpy.org/doc/)
 
 - The NumPy on GitHub
     - en - [https://github.com/numpy/numpy/](https://github.com/numpy/numpy/)
@@ -32,10 +32,26 @@ Pandas is a tool for data analysis and manipulation, built on top of Python. Lea
     - en - [https://pandas.pydata.org/](https://pandas.pydata.org/)
 
 - The Pandas documentation
-    - en: [https://pandas.pydata.org/docs/](https://pandas.pydata.org/docs/)
+    - en - [https://pandas.pydata.org/docs/](https://pandas.pydata.org/docs/)
 
 - The Pandas on GitHub
     - en - [https://github.com/pandas-dev/pandas](https://github.com/pandas-dev/pandas)
 
 - The Pandas on PyPI
     - en - [https://pypi.org/project/pandas/](https://pypi.org/project/pandas/)
+
+
+## Scikit Learn
+Scikit Learn is a Python module for machine learning built on top of SciPy and is distributed under the 3-Clause BSD license.
+
+- The Scikit Learn official page
+    - en - [https://scikit-learn.org/](https://scikit-learn.org/)
+
+- The Scikit Learn documentation
+    - en - [https://scikit-learn.org/stable/](https://scikit-learn.org/stable/)
+
+- The Scikit Learn on GitHub
+    - en - [https://github.com/scikit-learn/scikit-learn](https://github.com/scikit-learn/scikit-learn)
+
+- The Scikit Learn on PyPI
+    - en - [https://pypi.org/project/scikit-learn/](https://pypi.org/project/scikit-learn/)
