@@ -1,11 +1,9 @@
 // Link processing
 
-
-
 // Add rel='noopener noindex nofollow' and target ='_blank' attribute to each
 // https://stackoverflow.com/questions/55442000/do-no-index-no-follow-on-certain-links
 const extlinks = document.querySelectorAll('a[href^=http]');
-[].forEach.call(extlinks, link => {
+[].forEach.call(extlinks, link =>{
   link.setAttribute('rel', 'noopener noindex nofollow'),
   link.setAttribute('target', '_blank')
 });
