@@ -4,5 +4,8 @@ Python is a programming language that lets you work quickly and integrate system
 
 ---
 
-- [The official Python page](https://python.org)
-- [Python documentation](https://docs.python.org/3/)
+- The official Python page
+[en](https://python.org)
+
+- Python documentation
+[en](https://docs.python.org/3/)

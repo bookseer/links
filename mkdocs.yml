@@ -31,8 +31,10 @@ copyright: >-
 # Configuration
 
 extra_javascript:
-  - assets/js/noindex.js
+  - assets/js/links.js
 
+extra_css:
+  - assets/css/links.css
 
 theme:
   name: material
@@ -71,7 +73,7 @@ theme:
     - navigation.instant.progress
     - navigation.tabs
     - navigation.tabs.sticky
-    #- navigation.sections
+    - navigation.sections
     - navigation.path
     #- toc.integrate
     - navigation.indexes

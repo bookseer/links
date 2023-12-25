@@ -8,7 +8,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "link-on-website"
-version = "0.2.0"
+version = "2023.12.25"
 description = "Link on Website"
 authors = ["Alexander Krasnikov <alexander@krasnikov.net>"]
 maintainers = ["askras <alexander@krasnikov.net>"]
