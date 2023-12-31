@@ -4,7 +4,12 @@ default_language_version:
 minimum_pre_commit_version: 3.5.0
 
 files: ''
-exclude: ^venv/ ^.git/
+exclude: |
+  (?x)^(
+    venv/.*|
+    .git/.*|
+    book/_build/.*
+  )$
 fail_fast: true # false #
 
 default_stages: [pre-commit, pre-merge-commit, pre-push]
@@ -13,6 +18,7 @@ repos:
 
 - repo: local
   hooks:
+
 
 #======================================================================================================================
 # Git hooks
@@ -78,7 +84,7 @@ repos:
     description: "https://github.com/pre-commit/pre-commit-hooks"
     language: system
     entry: end-of-file-fixer
-    types_or: [markdown, pyi, python]
+    types_or: [markdown, pyi, python, toml]
     require_serial: true
 
   - id: fix-byte-order-marker
@@ -89,13 +95,15 @@ repos:
     types: [text]
     require_serial: true
 
-  - id: check-executables-have-shebangs
-    name: "Checks that non-binary executables have a proper shebang (check-executables-have-shebangs)"
-    description: "https://github.com/pre-commit/pre-commit-hooks"
-    language: system
-    entry: check-executables-have-shebangs
-    types_or: [bash, python]
-    require_serial: true
+# False positives raised by check-executables-have-shebangs
+# https://github.com/pre-commit/pre-commit-hooks/issues/528
+#  - id: check-executables-have-shebangs
+#    name: "Checks that non-binary executables have a proper shebang (check-executables-have-shebangs)"
+#    description: "https://github.com/pre-commit/pre-commit-hooks"
+#    language: system
+#    entry: check-executables-have-shebangs
+#    types_or: [bash, python]
+#    require_serial: true
 
   - id: check-symlinks
     name: "Checks for symlinks which do not point to anything (check-symlinks)"
@@ -193,5 +201,208 @@ repos:
     language: system
     entry: requirements-txt-fixer
     files: ^(requirements).*(.txt)$
+    #^requirements.*\.txt$
     require_serial: true
     verbose: true
+
+
+#======================================================================================================================
+# Python hooks
+#======================================================================================================================
+  - id: fix-encoding-pragma
+    name: "Remove # -*- coding: utf-8 -*- to the top of python files (fix-encoding-pragma)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: fix-encoding-pragma
+    args: [--remove]
+    types_or: [pyi, python]
+    require_serial: true
+
+  - id: check-docstring-first
+    name: "Checks for a common error of placing code before the docstring (check-docstring-first)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: check-docstring-first
+    types_or: [pyi, python]
+    require_serial: true
+
+  - id: debug-statements
+    name: "Check for debugger imports and py37+ breakpoint() calls in python source (debug-statements)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: debug-statement-hook
+    types_or: [pyi, python]
+    require_serial: true
+
+  - id: pyupgrade
+    name: "Automatically upgrade syntax for newer versions (pyupgrade)"
+    description: "https://github.com/asottile/pyupgrade"
+    language: system
+    entry: python -m pyupgrade
+    args: [--py312-plus]
+    types_or: [pyi, python]
+    require_serial: true
+
+  - id: pyupgrade-nbqa
+    name: "Automatically upgrade syntax for newer versions (pyupgrade + nbqa)"
+    description: "https://github.com/asottile/pyupgrade
+                  https://github.com/nbQA-dev/nbQA"
+    language: system
+    entry: python -m nbqa pyupgrade
+    args: [--py312-plus]
+    types_or: [jupyter, markdown]
+    require_serial: true
+
+#  - id: check-builtin-literals
+#    name: "Require literal syntax when initializing empty or zero Python builtin types (check-builtin-literals)"
+#    description: "https://github.com/pre-commit/pre-commit-hooks"
+#    language: system
+#    entry: check-builtin-literals
+#    types_or: [jupyter, markdown, pyi, python ]
+#    require_serial: true
+
+  - id: isort
+    name: "Import sorting (isort)"
+    description: "https://github.com/pycqa/isort"
+    language: system
+    entry: python -m isort
+    args: [--settings-file=pyproject.toml,
+           --float-to-top,
+    ]
+    types_or: [pyi, python]
+    require_serial: true
+
+  - id: isort-nbqa
+    name: "Import sorting (isort + nbqa)"
+    description: "https://github.com/pycqa/isort
+                  https://github.com/nbQA-dev/nbQA"
+    language: system
+    entry: python -m nbqa isort
+    args: [--settings-file=pyproject.toml]
+    types_or: [jupyter, markdown]
+    require_serial: true
+
+  - id: black
+    name: "Python code formatter (bandit)"
+    description: "https://github.com/psf/black"
+    language: system
+    entry: python -m black
+    args: [--config=pyproject.toml]
+    types_or: [pyi, python]
+    require_serial: true
+
+  - id: black-nbqa
+    name: "Python code formatter (bandit + nbqa)"
+    description: "https://github.com/psf/black
+                  https://github.com/nbQA-dev/nbQA"
+    language: system
+    entry: python -m nbqa black --config pyproject.toml
+    args: [--config=pyproject.toml]
+    types_or: [jupyter, markdown]
+    require_serial: true
+
+  - id: mypy
+    name: "Static type checking (mypy)"
+    description: "https://github.com/python/mypy"
+    language: system
+    entry: python -m mypy
+    args: [--config-file=pyproject.toml]
+    types_or: [pyi, python]
+    require_serial: true
+
+  - id: mypy-nbqa
+    name: "Static type checking (mypy + nbqa)"
+    description: "https://github.com/python/mypy
+                  https://github.com/nbQA-dev/nbQA"
+    language: system
+    entry: python -m nbqa mypy
+    args: [--config-file=pyproject.toml]
+    types_or: [jupyter, markdown]
+    require_serial: true
+
+  - id: bandit
+    name: "Security code analysis (bandit)"
+    description: "https://github.com/PyCQA/bandit"
+    language: system
+    entry: python -m bandit
+    args: [--configfile=pyproject.toml]
+    types_or: [pyi, python]
+    require_serial: true
+
+  - id: bandit-nbqa
+    name: "Security code analysis (bandit + nbqa)"
+    description: "https://github.com/PyCQA/bandit
+                  https://github.com/nbQA-dev/nbQA"
+    language: system
+    entry: python -m nbqa bandit
+    args: [--configfile=pyproject.toml]
+    types_or: [jupyter, markdown]
+    require_serial: true
+
+  - id: pylint
+    name: "Static code analysis (pylint)"
+    description: "https://github.com/pylint-dev/pylint"
+    language: system
+    entry: python -m pylint
+    args: [--rcfile=pyproject.toml]
+    types_or: [pyi, python]
+    require_serial: true
+
+  - id: pylint-nbqa
+    name: "Static code analysis (pylint + nbqa)"
+    description: "https://github.com/pylint-dev/pylint
+                  https://github.com/nbQA-dev/nbQA"
+    language: system
+    entry: python -m nbqa pylint
+    args: [--rcfile=pyproject.toml,
+           --disable=C0111, # Missing module docstring (missing-module-docstring)
+           --disable=C0413, # Import should be placed at the top of the module (wrong-import-position)
+    ]
+    types_or: [jupyter, markdown]
+    require_serial: true
+
+  - id: doctest
+    name: "Test interactive Python examples (doctest)"
+    description: "https://docs.python.org/3/library/doctest.html"
+    language: system
+    entry: python -m doctest
+    #args: [--verbose]
+    types: [python]
+    require_serial: true
+
+  - id: doctest-nbqa
+    name: "Test interactive Python examples (doctest + nbqa)"
+    description: "https://docs.python.org/3/library/doctest.html
+                  https://github.com/nbQA-dev/nbQA"
+    language: system
+    entry: python -m nbqa doctest
+    #args: [--verbose]
+    types_or: [jupyter, markdown, tex]
+    require_serial: true
+
+  - id: name-tests-test
+    name: "Verifies that test files are named correctly (name-tests-test)"
+    description: "https://github.com/pre-commit/pre-commit-hooks"
+    language: system
+    entry: name-tests-test
+    args: [--pytest]
+    files: ^tests/
+    types: [python]
+    require_serial: true
+
+  - id: pytest
+    name: "Testing the code (pytest)"
+    description: "https://github.com/pytest-dev/pytest/"
+    language: system
+    entry: python -m pytest
+    args: [--tb=line,
+           --cache-clear,
+           --ignore=./tests/__init__.py,
+           --doctest-modules,
+           --verbose,
+    ]
+    files:  ^(tests\/).*(_test.py)$
+    types: [python]
+    require_serial: true
+    always_run: true
+    #verbose: true
