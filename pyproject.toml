@@ -8,7 +8,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "bookseer-links"
-version = "2025.01.11"
+version = "2025.01.12"
 description = "Каталог полезных ссылок"
 authors = ["Alexander Krasnikov <askrasnikov@gmail.com>"]
 maintainers = ["askras <askrasnikov@gmail.com>"]
@@ -168,7 +168,7 @@ ghp-import ./book/_build/html --no-jekyll --push --force --cname=links.bookseer.
 
 clean_book = """
 echo 'Clean book'
-rm -rf book/_build
+jupyter-book clean --all ./book/
 """
 
 
